@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    static String request;
     public UserDaoJDBCImpl() {
     }
-
     public void createUsersTable() {
         Util.connectionAndStatement("""
                  CREATE TABLE  if not exists UTable  (
@@ -33,7 +31,7 @@ public class UserDaoJDBCImpl implements UserDao {
             ps.setString(1, name);
             ps.setString(2, lastName);
             ps.setByte(3, age);
-            boolean y = ps.execute();
+            ps.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -46,8 +44,7 @@ public class UserDaoJDBCImpl implements UserDao {
                     WHERE id = ?
                     """)) {
                 ps.setLong(1, id);
-
-                boolean y = ps.execute();
+                ps.execute();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
